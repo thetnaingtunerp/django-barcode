@@ -27,3 +27,10 @@ class Product(models.Model):
         ean.write(buffer)
         self.barcode.save('barcode1.png', File(buffer), save=False)
         return super().save(*args, **kwargs)
+    
+class GeneratedBarcode(models.Model):
+    code = models.CharField(max_length=100, unique=True)
+    image = models.ImageField(upload_to='media/barcodes/')
+
+    def __str__(self):
+        return self.code
